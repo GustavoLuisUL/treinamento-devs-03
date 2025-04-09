@@ -15,11 +15,18 @@ services:
     volumes:
       - backend: 
 
+  app-front:
+    networks:
+      - frontend
+    build:
+      context: ./ultralims-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./ultralims-frontend:/app 
+      - /app/node_modules 
+    ports: 
+      - "80:5173"
 
-
-#app-front
-#- ./ultralims-frontend:/app 
-#- /app/node_modules 
 #app-backend
 # - .:/var/www/html 
 
@@ -27,8 +34,10 @@ services:
 #  - ./mysql:/var/lib/mysql 
 #  - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql 
 
-#networks
-
+networks:
+  frontend:
+    driver: bridge
+      
 
 
 
