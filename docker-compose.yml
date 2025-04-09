@@ -1,0 +1,24 @@
+version: '3.8'
+
+volumes:
+  logs:
+    driver: local
+
+services:
+
+#app-front
+#- ./ultralims-frontend:/app 
+#- /app/node_modules 
+#app-backend
+# - .:/var/www/html 
+
+#mysql
+#  - ./mysql:/var/lib/mysql 
+#  - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql 
+
+#networks
+
+
+
+
+ 
