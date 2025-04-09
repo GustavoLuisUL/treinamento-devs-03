@@ -6,8 +6,11 @@ volumes:
 
 services:
   app-front:
+    networks:
+      - frontend
     build:
       context: ./ultralims-frontend
+      dockerfile: Dockerfile
     volumes:
       - ./ultralims-frontend:/app 
       - /app/node_modules 
@@ -21,7 +24,9 @@ services:
 #  - ./mysql:/var/lib/mysql 
 #  - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql 
 
-#networks
+networks:
+  frontend:
+    driver: bridge
 
 
 
