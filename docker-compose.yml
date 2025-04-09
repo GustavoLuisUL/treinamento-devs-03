@@ -5,6 +5,27 @@ volumes:
     driver: local
 
 services:
+  php: 
+  build: 
+  context: .
+  dockerfile: ultralims-backend/api/dockerfile
+  ports:
+  - 80:80 
+  volumes:
+  - ./var/www/html
+
+  mysqldatabase:
+  container_name: mysql
+  image: mysql
+  restart: always
+  environment:
+  MYSQL_DATABESE: 
+  MYSQL_ROOT_PASSWORD:
+  MYSQL_USER: treinamentos_dev
+
+  networks:
+
+bridge: 
 
 #app-front
 #- ./ultralims-frontend:/app 
