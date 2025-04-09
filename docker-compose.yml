@@ -13,7 +13,9 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - backend: 
+      - ultralims_backend/api:/var/www/html
+    networks:
+      - frontend
 
   app-front:
     networks:
