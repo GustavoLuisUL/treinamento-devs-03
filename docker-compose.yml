@@ -7,29 +7,47 @@ volumes:
     driver: local
 
 services:
+  backend:
+    build: 
+      context: ultralims-backend/api
+      dockerfile: dockerfile
+    container_name: ultralims_backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ultralims_backend/api:/var/www/html
+    networks:
+      - frontend
 
-#app-front
-#- ./ultralims-frontend:/app 
-#- /app/node_modules 
-#app-backend
-# - .:/var/www/html 
+  app-front:
+    networks:
+      - frontend
+    build:
+      context: ./ultralims-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./ultralims-frontend:/app 
+      - /app/node_modules 
+    ports: 
+      - "80:5173"
 
   db:
     image: mysql:8.3.0
-
     environment:
       MYSQL_ROOT_PASSWORD: mysql
-    
     ports:
       - '3306:3306'
     volumes:
       - mysql-volume:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql 
-
     networks:
-      - app-networks
+      - frontend
 
-#networks
 networks:
-  app-networks:
-    driver: bridge 
+  frontend:
+    driver: bridge
+      
+
+
+
+ 
