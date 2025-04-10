@@ -17,14 +17,14 @@ services:
     ports:
       - "8080:80"
     networks:
-      - frontend
+      - ultralims-network
 
   app-front:
     networks:
-      - frontend
+      - ultralims-network
     build:
       context: ./ultralims-frontend
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     volumes:
       - ./ultralims-frontend:/app 
       - /app/node_modules 
@@ -41,10 +41,10 @@ services:
       - mysql-volume:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql 
     networks:
-      - frontend
+      - ultralims-network
 
 networks:
-  frontend:
+  ultralims-network:
     driver: bridge
       
 
