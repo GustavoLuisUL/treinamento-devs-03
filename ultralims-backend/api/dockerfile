@@ -1,11 +1,23 @@
 FROM php:8.2-apache
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    libonig-dev \
+    pkg-config \
+    git \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_mysql gd mbstring zip intl xml opcache bcmath \
+    && apt-get clean
 
-##instalar dependencias 
-
-
-# Enable mod_rewrite for Apache
 RUN a2enmod rewrite
 
+WORKDIR /var/www/html/
 
-# Ensure Apache service is running
+COPY . .
+
+EXPOSE 80
 CMD ["apache2-foreground"]
