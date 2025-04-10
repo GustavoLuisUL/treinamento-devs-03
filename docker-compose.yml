@@ -7,15 +7,15 @@ volumes:
     driver: local
 
 services:
-  backend:
+  app-backend:
     build: 
-      context: ultralims-backend/api
+      context: ./ultralims-backend/api/
       dockerfile: dockerfile
     container_name: ultralims_backend
+    volumes:
+      - ./ultralims-backend/api:/var/www/html
     ports:
       - "8080:80"
-    volumes:
-      - ultralims_backend/api:/var/www/html
     networks:
       - ultralims-network
 
