@@ -15,7 +15,10 @@ services:
 # - .:/var/www/html 
 
   db:
-    image: mysql
+    image: mysql:8.3.0
+
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
     
     ports:
       - '3306:3306'
